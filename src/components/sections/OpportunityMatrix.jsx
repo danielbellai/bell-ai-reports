@@ -41,7 +41,7 @@ export default function OpportunityMatrix({ opportunities }) {
         Opportunity Matrix
       </h2>
       <p className="text-center text-slate mb-10 max-w-2xl mx-auto">
-        Impact vs. effort for every opportunity we identified. Click any dot for details.
+        See which opportunities move the needle with minimal effort. Click any dot for details.
       </p>
 
       {/* Desktop: scatter plot */}

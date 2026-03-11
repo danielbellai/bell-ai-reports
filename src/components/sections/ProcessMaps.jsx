@@ -30,7 +30,7 @@ export default function ProcessMaps({ processes }) {
         How Your Operation Works
       </h2>
       <p className="text-center text-slate mb-10 max-w-2xl mx-auto">
-        We mapped your core workflows to understand where time goes and where things break down.
+        We've mapped your core workflows. Here's where time disappears and where things break down.
       </p>
 
       <div className="space-y-10">

@@ -32,7 +32,7 @@ export default function FrictionPoints({ frictionPoints }) {
         Where Time and Quality Are at Risk
       </h2>
       <p className="text-center text-slate mb-8 max-w-2xl mx-auto">
-        Each friction point represents a recurring inefficiency or risk we identified in your operations.
+        Here's what's slowing your team down and putting quality at risk.
       </p>
 
       {/* Summary pills */}

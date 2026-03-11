@@ -22,7 +22,7 @@ export default function Roadmap({ phases }) {
         Implementation Roadmap
       </h2>
       <p className="text-center text-slate mb-10 max-w-2xl mx-auto">
-        A clear path from today to transformed — starting with a win in the first 48 hours.
+        Your first win hits in 48 hours. Everything after that builds on momentum.
       </p>
 
       <div ref={containerRef} className="relative max-w-3xl mx-auto pl-12">

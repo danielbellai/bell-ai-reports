@@ -53,7 +53,7 @@ export default function ROICalculator({ config }) {
         ROI Calculator
       </h2>
       <p className="text-center text-slate mb-10 max-w-2xl mx-auto">
-        Adjust the sliders to match your reality and see the projected savings in real time.
+        Change the sliders to match your reality. These aren't guesses.
       </p>
 
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

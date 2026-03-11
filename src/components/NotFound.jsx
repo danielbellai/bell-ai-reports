@@ -8,7 +8,7 @@ export default function NotFound() {
         <h1 className="text-6xl font-bold mb-4">404</h1>
         <p className="text-xl text-gray-300 mb-2">Report not found</p>
         <p className="text-gray-500 mb-8">
-          This report link may be incorrect or has not been published yet.
+          This link is probably wrong or hasn't been published yet.
         </p>
         <p className="text-teal text-sm italic">{brand.tagline}</p>
       </div>

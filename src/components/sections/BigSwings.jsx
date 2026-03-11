@@ -23,7 +23,7 @@ export default function BigSwings({ bigSwings, deprioritize }) {
         Big Swings & What to Skip
       </h2>
       <p className="text-center text-slate mb-8 max-w-2xl mx-auto">
-        Strategic opportunities worth pursuing after quick wins — and things we recommend you don't spend money on.
+        Big moves worth making once the quick wins are in place. And the stuff that'll drain your budget for no payoff.
       </p>
 
       {/* Tabs */}
