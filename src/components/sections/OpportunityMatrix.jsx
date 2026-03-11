@@ -49,76 +49,79 @@ export default function OpportunityMatrix({ opportunities }) {
         <div className="relative bg-white rounded-xl border border-brand-border p-8">
           {/* Y-axis label */}
           <div className="absolute left-1 top-1/2 -translate-y-1/2 -rotate-90 text-[11px] text-slate/70 font-semibold tracking-widest uppercase">
-            Impact
+            Impact →
           </div>
 
-          {/* 2x2 Quadrant Grid */}
-          <div className="ml-10 mb-6 grid grid-cols-2 grid-rows-2 rounded-lg overflow-hidden border border-gray-200" style={{ height: 420 }}>
-            {/* Top-left: Quick Wins (high impact, low effort) */}
-            <div className="relative bg-emerald-50/80 border-r border-b border-gray-200 p-3">
-              <span className="text-[11px] font-semibold text-emerald-700/80 tracking-wide uppercase">Quick Wins</span>
-              <span className="block text-[10px] text-emerald-600/60 mt-0.5">High impact, low effort</span>
+          {/* Grid + Dots wrapper */}
+          <div className="relative ml-10 mb-6" style={{ height: 420 }}>
+            {/* 2x2 Quadrant Grid */}
+            <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 rounded-lg overflow-hidden border border-gray-200">
+              {/* Top-left: Quick Wins (high impact, low effort) */}
+              <div className="relative bg-emerald-50/80 border-r border-b border-gray-200 p-3">
+                <span className="text-[11px] font-semibold text-emerald-700/80 tracking-wide uppercase">Quick Wins</span>
+                <span className="block text-[10px] text-emerald-600/60 mt-0.5">High impact, low effort</span>
+              </div>
+              {/* Top-right: Big Swings (high impact, high effort) */}
+              <div className="relative bg-amber-50/60 border-b border-gray-200 p-3">
+                <span className="text-[11px] font-semibold text-amber-700/80 tracking-wide uppercase">Big Swings</span>
+                <span className="block text-[10px] text-amber-600/60 mt-0.5">High impact, high effort</span>
+              </div>
+              {/* Bottom-left: Easy Extras (low impact, low effort) */}
+              <div className="relative bg-sky-50/50 border-r border-gray-200 p-3 flex flex-col justify-end">
+                <span className="text-[11px] font-semibold text-sky-700/70 tracking-wide uppercase">Easy Extras</span>
+                <span className="block text-[10px] text-sky-600/50 mt-0.5">Low impact, low effort</span>
+              </div>
+              {/* Bottom-right: Reconsider (low impact, high effort) */}
+              <div className="relative bg-rose-50/40 border-gray-200 p-3 flex flex-col justify-end">
+                <span className="text-[11px] font-semibold text-rose-700/60 tracking-wide uppercase">Reconsider</span>
+                <span className="block text-[10px] text-rose-600/40 mt-0.5">Low impact, high effort</span>
+              </div>
             </div>
-            {/* Top-right: Big Swings (high impact, high effort) */}
-            <div className="relative bg-amber-50/60 border-b border-gray-200 p-3">
-              <span className="text-[11px] font-semibold text-amber-700/80 tracking-wide uppercase">Big Swings</span>
-              <span className="block text-[10px] text-amber-600/60 mt-0.5">High impact, high effort</span>
-            </div>
-            {/* Bottom-left: Easy Extras (low impact, low effort) */}
-            <div className="relative bg-sky-50/50 border-r border-gray-200 p-3 flex flex-col justify-end">
-              <span className="text-[11px] font-semibold text-sky-700/70 tracking-wide uppercase">Easy Extras</span>
-              <span className="block text-[10px] text-sky-600/50 mt-0.5">Low impact, low effort</span>
-            </div>
-            {/* Bottom-right: Reconsider (low impact, high effort) */}
-            <div className="relative bg-rose-50/40 border-gray-200 p-3 flex flex-col justify-end">
-              <span className="text-[11px] font-semibold text-rose-700/60 tracking-wide uppercase">Reconsider</span>
-              <span className="block text-[10px] text-rose-600/40 mt-0.5">Low impact, high effort</span>
-            </div>
+
+            {/* Dots overlaid on same container */}
+            <motion.div
+              className="absolute inset-0"
+              style={{ pointerEvents: "none" }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {allOpps.map((opp, i) => {
+                // Map effort 1-10 to x 5%-95%, impact 1-10 to y 95%-5%
+                const x = 5 + ((opp.effort - 1) / 9) * 90;
+                const y = 95 - ((opp.impact - 1) / 9) * 90;
+                const color = getColor(opp.engine, engines);
+
+                return (
+                  <motion.button
+                    key={opp.id}
+                    custom={i}
+                    variants={dotVariant}
+                    onClick={() => setSelected(selected?.id === opp.id ? null : opp)}
+                    className="absolute flex items-center justify-center rounded-full cursor-pointer hover:scale-110 transition-transform"
+                    style={{
+                      left: `${x}%`,
+                      top: `${y}%`,
+                      width: 38,
+                      height: 38,
+                      backgroundColor: color,
+                      transform: "translate(-50%, -50%)",
+                      border: selected?.id === opp.id ? "3px solid #1B2A4A" : "2px solid white",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                      pointerEvents: "auto",
+                    }}
+                    title={opp.name}
+                  >
+                    {isQuickWin(opp) ? (
+                      <Star className="w-4 h-4 text-white fill-white" />
+                    ) : (
+                      <span className="text-xs font-bold text-white">{opp.id}</span>
+                    )}
+                  </motion.button>
+                );
+              })}
+            </motion.div>
           </div>
-
-          {/* Dots overlaid on grid */}
-          <motion.div
-            className="absolute ml-10 rounded-lg"
-            style={{ top: 32, left: 32, right: 32, bottom: 52, pointerEvents: "none" }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {allOpps.map((opp, i) => {
-              // Map effort 1-10 to x 5%-95%, impact 1-10 to y 95%-5%
-              const x = 5 + ((opp.effort - 1) / 9) * 90;
-              const y = 95 - ((opp.impact - 1) / 9) * 90;
-              const color = getColor(opp.engine, engines);
-
-              return (
-                <motion.button
-                  key={opp.id}
-                  custom={i}
-                  variants={dotVariant}
-                  onClick={() => setSelected(selected?.id === opp.id ? null : opp)}
-                  className="absolute flex items-center justify-center rounded-full cursor-pointer hover:scale-110 transition-transform"
-                  style={{
-                    left: `${x}%`,
-                    top: `${y}%`,
-                    width: 38,
-                    height: 38,
-                    backgroundColor: color,
-                    transform: "translate(-50%, -50%)",
-                    border: selected?.id === opp.id ? "3px solid #1B2A4A" : "2px solid white",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                    pointerEvents: "auto",
-                  }}
-                  title={opp.name}
-                >
-                  {isQuickWin(opp) ? (
-                    <Star className="w-4 h-4 text-white fill-white" />
-                  ) : (
-                    <span className="text-xs font-bold text-white">{opp.id}</span>
-                  )}
-                </motion.button>
-              );
-            })}
-          </motion.div>
 
           {/* X-axis label */}
           <div className="text-center text-[11px] text-slate/70 font-semibold tracking-widest uppercase -mt-3 mb-3 ml-10">
