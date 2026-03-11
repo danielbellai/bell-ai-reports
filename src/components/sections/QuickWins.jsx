@@ -22,7 +22,7 @@ export default function QuickWins({ quickWins }) {
         Recommended Quick Wins
       </h2>
       <p className="text-center text-slate mb-10 max-w-2xl mx-auto">
-        Most of these deliver measurable results within 48 hours. High impact, minimal effort.
+        Most of these deliver measurable results within 48 hours. High impact, minimal drag.
       </p>
 
       <motion.div

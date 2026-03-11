@@ -26,11 +26,11 @@ export default function Roadmap({ phases }) {
       </p>
 
       <div ref={containerRef} className="relative max-w-3xl mx-auto pl-12">
-        {/* Drawing line */}
-        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-brand-border" />
+        {/* Drawing line — centered on dots at pl-12 minus left-7 + half of w-4 = 28px */}
+        <div className="absolute top-0 bottom-0 w-0.5 bg-brand-border" style={{ left: "27px" }} />
         <motion.div
-          className="absolute left-5 top-0 w-0.5 bg-teal origin-top"
-          style={{ height: lineHeight }}
+          className="absolute top-0 w-0.5 bg-teal origin-top"
+          style={{ left: "27px", height: lineHeight }}
         />
 
         <div className="space-y-8">

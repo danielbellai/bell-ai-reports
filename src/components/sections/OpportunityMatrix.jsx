@@ -28,10 +28,11 @@ function getColor(engine, allEngines) {
   return palette[idx % palette.length];
 }
 
-export default function OpportunityMatrix({ opportunities }) {
+export default function OpportunityMatrix({ opportunities, frictionPoints = [] }) {
   const [selected, setSelected] = useState(null);
   const allOpps = [...opportunities.quickWins, ...opportunities.bigSwings];
   const engines = [...new Set(allOpps.map(o => o.engine))];
+  const frictionMap = Object.fromEntries(frictionPoints.map(fp => [fp.id, fp.label]));
 
   const isQuickWin = (opp) => opportunities.quickWins.some(qw => qw.id === opp.id);
 
@@ -87,9 +88,14 @@ export default function OpportunityMatrix({ opportunities }) {
               viewport={{ once: true }}
             >
               {allOpps.map((opp, i) => {
-                // Map effort 1-10 to x 5%-95%, impact 1-10 to y 95%-5%
-                const x = 5 + ((opp.effort - 1) / 9) * 90;
-                const y = 95 - ((opp.impact - 1) / 9) * 90;
+                // Map 1-5 into the lower/left half, 6-10 into the upper/right half
+                // with a gap around the 50% quadrant boundary so dots don't straddle it
+                const mapAxis = (val) => {
+                  if (val <= 5) return 8 + ((val - 1) / 4) * 36;
+                  return 56 + ((val - 6) / 4) * 36;
+                };
+                const x = mapAxis(opp.effort);
+                const y = 100 - mapAxis(opp.impact);
                 const color = getColor(opp.engine, engines);
 
                 return (
@@ -205,7 +211,7 @@ export default function OpportunityMatrix({ opportunities }) {
                   <span className="text-xs text-slate">Resolves friction points: </span>
                   {selected.solves.map(id => (
                     <span key={id} className="text-xs font-bold text-teal bg-teal/10 px-2 py-0.5 rounded mr-1">
-                      {id}
+                      {id} {frictionMap[id] || ""}
                     </span>
                   ))}
                 </div>

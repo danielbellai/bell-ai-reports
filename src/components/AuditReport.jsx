@@ -46,7 +46,7 @@ export default function AuditReport() {
       <OverviewStats data={data} />
       <ProcessMaps processes={data.processes} />
       <FrictionPoints frictionPoints={data.frictionPoints} />
-      <OpportunityMatrix opportunities={data.opportunities} />
+      <OpportunityMatrix opportunities={data.opportunities} frictionPoints={data.frictionPoints} />
       <QuickWins quickWins={data.quickWinDetails} />
       <ROICalculator config={data.roiCalculator} />
       <BigSwings bigSwings={data.opportunities.bigSwings} deprioritize={data.opportunities.deprioritize} />
