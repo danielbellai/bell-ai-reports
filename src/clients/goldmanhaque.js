@@ -60,14 +60,14 @@ export const clientData = {
 
   opportunities: {
     quickWins: [
-      { id: "QW1", name: "Automated Document Collection Portal", impact: 5, effort: 2, engine: "Client Onboarding", description: "Replace email-based document collection with an automated portal that sends reminders and tracks what's missing.", solves: ["F1"], tools: "Canopy, TaxDome, or custom portal" },
-      { id: "QW2", name: "PDF Data Extraction", impact: 4, effort: 2, engine: "Client Onboarding", description: "Use AI to extract data from uploaded PDFs and auto-populate client records.", solves: ["F2"], tools: "Docsumo, Rossum, or custom OCR pipeline" },
-      { id: "QW3", name: "Standardized Report Templates", impact: 3, effort: 1, engine: "Monthly Bookkeeping", description: "Create consistent branded report templates that auto-populate from QuickBooks data.", solves: ["F5"], tools: "QuickBooks reporting + template system" },
-      { id: "QW4", name: "Task Management System", impact: 4, effort: 2, engine: "All", description: "Centralize all task tracking with assignments, deadlines, and status visibility.", solves: ["F6"], tools: "Karbon, Jetpack Workflow, or Asana" },
+      { id: "QW1", name: "Automated Document Collection Portal", impact: 10, effort: 4, engine: "Client Onboarding", description: "Replace email-based document collection with an automated portal that sends reminders and tracks what's missing.", solves: ["F1"], tools: "Canopy, TaxDome, or custom portal" },
+      { id: "QW2", name: "PDF Data Extraction", impact: 8, effort: 4, engine: "Client Onboarding", description: "Use AI to extract data from uploaded PDFs and auto-populate client records.", solves: ["F2"], tools: "Docsumo, Rossum, or custom OCR pipeline" },
+      { id: "QW3", name: "Standardized Report Templates", impact: 6, effort: 2, engine: "Monthly Bookkeeping", description: "Create consistent branded report templates that auto-populate from QuickBooks data.", solves: ["F5"], tools: "QuickBooks reporting + template system" },
+      { id: "QW4", name: "Task Management System", impact: 8, effort: 5, engine: "All", description: "Centralize all task tracking with assignments, deadlines, and status visibility.", solves: ["F6"], tools: "Karbon, Jetpack Workflow, or Asana" },
     ],
     bigSwings: [
-      { id: "BS1", name: "Bank Feed Automation", impact: 4, effort: 3, engine: "Monthly Bookkeeping", description: "Connect client bank accounts directly via Plaid/Yodlee for automatic statement pulls and categorization.", solves: ["F4"], tools: "Plaid, QuickBooks bank feeds" },
-      { id: "BS2", name: "AI-Assisted Review Workflow", impact: 5, effort: 4, engine: "Tax Preparation", description: "Implement AI-powered preliminary review that flags common errors before partner review, reducing bottleneck.", solves: ["F3"], tools: "Custom AI review tool, integration with tax software" },
+      { id: "BS1", name: "Bank Feed Automation", impact: 8, effort: 6, engine: "Monthly Bookkeeping", description: "Connect client bank accounts directly via Plaid/Yodlee for automatic statement pulls and categorization.", solves: ["F4"], tools: "Plaid, QuickBooks bank feeds" },
+      { id: "BS2", name: "AI-Assisted Review Workflow", impact: 10, effort: 8, engine: "Tax Preparation", description: "Implement AI-powered preliminary review that flags common errors before partner review, reducing bottleneck.", solves: ["F3"], tools: "Custom AI review tool, integration with tax software" },
     ],
     deprioritize: [
       { id: "D1", name: "Full Practice Management Overhaul", reason: "Too disruptive during tax season. The quick wins address the biggest pain points without requiring a platform migration." },

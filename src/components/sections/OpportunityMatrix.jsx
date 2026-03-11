@@ -47,30 +47,47 @@ export default function OpportunityMatrix({ opportunities }) {
       {/* Desktop: scatter plot */}
       <div className="hidden md:block">
         <div className="relative bg-white rounded-xl border border-brand-border p-8">
-          {/* Axes labels */}
-          <div className="absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 text-xs text-slate font-semibold tracking-wider">
-            IMPACT →
-          </div>
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-slate font-semibold tracking-wider">
-            EFFORT →
+          {/* Y-axis label */}
+          <div className="absolute left-1 top-1/2 -translate-y-1/2 -rotate-90 text-[11px] text-slate/70 font-semibold tracking-widest uppercase">
+            Impact
           </div>
 
-          {/* Quick win zone */}
-          <div className="absolute top-8 left-16 w-[45%] h-[45%] bg-emerald-50 rounded-lg border border-emerald-200/50 flex items-start justify-start p-3">
-            <span className="text-xs text-emerald-600 font-semibold">Quick Win Zone</span>
+          {/* 2x2 Quadrant Grid */}
+          <div className="ml-10 mb-6 grid grid-cols-2 grid-rows-2 rounded-lg overflow-hidden border border-gray-200" style={{ height: 420 }}>
+            {/* Top-left: Quick Wins (high impact, low effort) */}
+            <div className="relative bg-emerald-50/80 border-r border-b border-gray-200 p-3">
+              <span className="text-[11px] font-semibold text-emerald-700/80 tracking-wide uppercase">Quick Wins</span>
+              <span className="block text-[10px] text-emerald-600/60 mt-0.5">High impact, low effort</span>
+            </div>
+            {/* Top-right: Big Swings (high impact, high effort) */}
+            <div className="relative bg-amber-50/60 border-b border-gray-200 p-3">
+              <span className="text-[11px] font-semibold text-amber-700/80 tracking-wide uppercase">Big Swings</span>
+              <span className="block text-[10px] text-amber-600/60 mt-0.5">High impact, high effort</span>
+            </div>
+            {/* Bottom-left: Easy Extras (low impact, low effort) */}
+            <div className="relative bg-sky-50/50 border-r border-gray-200 p-3 flex flex-col justify-end">
+              <span className="text-[11px] font-semibold text-sky-700/70 tracking-wide uppercase">Easy Extras</span>
+              <span className="block text-[10px] text-sky-600/50 mt-0.5">Low impact, low effort</span>
+            </div>
+            {/* Bottom-right: Reconsider (low impact, high effort) */}
+            <div className="relative bg-rose-50/40 border-gray-200 p-3 flex flex-col justify-end">
+              <span className="text-[11px] font-semibold text-rose-700/60 tracking-wide uppercase">Reconsider</span>
+              <span className="block text-[10px] text-rose-600/40 mt-0.5">Low impact, high effort</span>
+            </div>
           </div>
 
-          {/* Grid */}
+          {/* Dots overlaid on grid */}
           <motion.div
-            className="relative ml-12 mb-8"
-            style={{ height: 400 }}
+            className="absolute ml-10 rounded-lg"
+            style={{ top: 32, left: 32, right: 32, bottom: 52, pointerEvents: "none" }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             {allOpps.map((opp, i) => {
-              const x = ((opp.effort - 0.5) / 5) * 100;
-              const y = ((5.5 - opp.impact) / 5) * 100;
+              // Map effort 1-10 to x 5%-95%, impact 1-10 to y 95%-5%
+              const x = 5 + ((opp.effort - 1) / 9) * 90;
+              const y = 95 - ((opp.impact - 1) / 9) * 90;
               const color = getColor(opp.engine, engines);
 
               return (
@@ -83,12 +100,13 @@ export default function OpportunityMatrix({ opportunities }) {
                   style={{
                     left: `${x}%`,
                     top: `${y}%`,
-                    width: 40,
-                    height: 40,
+                    width: 38,
+                    height: 38,
                     backgroundColor: color,
                     transform: "translate(-50%, -50%)",
                     border: selected?.id === opp.id ? "3px solid #1B2A4A" : "2px solid white",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                    pointerEvents: "auto",
                   }}
                   title={opp.name}
                 >
@@ -102,8 +120,13 @@ export default function OpportunityMatrix({ opportunities }) {
             })}
           </motion.div>
 
+          {/* X-axis label */}
+          <div className="text-center text-[11px] text-slate/70 font-semibold tracking-widest uppercase -mt-3 mb-3 ml-10">
+            Effort →
+          </div>
+
           {/* Legend */}
-          <div className="flex flex-wrap gap-4 mt-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center">
             {engines.map((engine) => (
               <div key={engine} className="flex items-center gap-1.5 text-sm text-slate">
                 <span className="w-3 h-3 rounded-full" style={{ backgroundColor: getColor(engine, engines) }} />
