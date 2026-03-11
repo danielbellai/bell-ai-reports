@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:/Users/danie/OneDrive/Documents/GitHub/bell-ai-reports\" && npm install framer-motion recharts lucide-react react-countup)",
+      "Bash(cd \"C:/Users/danie/OneDrive/Documents/GitHub/bell-ai-reports\" && npm install -D tailwindcss @tailwindcss/vite)",
+      "Bash(cd \"C:/Users/danie/OneDrive/Documents/GitHub/bell-ai-reports\" && npx vite build 2>&1)",
+      "Bash(cd \"C:/Users/danie/OneDrive/Documents/GitHub/bell-ai-reports\" && npm run dev)"
+    ]
+  }
+}
